@@ -1,0 +1,18 @@
+
+.jumbotron{
+
+	margin: auto;
+	width:60%;
+	text-align: center;
+	background: grey;
+}
+.currentTrainSchedule {
+margin: auto;
+	width:60%;
+
+}
+.trainInput {
+margin: auto;
+	width:60%;
+	
+}

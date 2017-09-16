@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>train homework</title>
+</head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+ <script src="https://code.jquery.com/jquery.js"></script>
+
+ <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+<header>
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Train Schedule</h1>
+    <p class="lead">Enter Time to See When the Train Arrives</p>
+  </div>
+  </header>
+<body>
+<div class="currentTrainSchedule">
+	<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Train Name</th>
+      <th>Destination</th>
+      <th>Frequency</th>
+      <th>Next Arrival</th>
+      <th>Minutes Away</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Trenton Express</td>
+      <td>Trenton</td>
+      <td>25</td>
+      <td>05:35PM</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Oregon Trail</td>
+      <td>Salem, Oregon</td>
+      <td>3600/td>
+      <td>01:39Pm</td>
+      <td>1154</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">#</td>
+      <td>#</td>
+      <td>#</td>
+      <td>#</td>
+
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+</div>
+<div class="trainInput">
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1"> Train Name</label>
+    <input class="form-control" id="trainName" aria-describedby="emailHelp" placeholder="">
+    <small id="emailHelp" class="form-text text-muted"></small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Destination</label>
+    <input class="form-control" id="destination" placeholder="">
+  </div><div class="form-group">
+    <label for="exampleInputPassword1">First Train Time (HH:mm -miltitary time)</label>
+    <input class="form-control" id="firstTrainTime" placeholder="Time">
+  </div><div class="form-group">
+    <label for="exampleInputPassword1">Frequency</label>
+    <input  class="form-control" id="frequency" placeholder="Time">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</div>
+
+
+</div>
+
+</body>
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+
+      apiKey: "AIzaSyCLbEjKvRPiZdO3I6ADlExj_N0ZD60nATk",
+
+      authDomain: "recent-user-with-all-users.firebaseapp.com",
+
+      databaseURL: "https://recent-user-with-all-users.firebaseio.com",
+
+      storageBucket: "recent-user-with-all-users.appspot.com"
+
+    };
+
+    firebase.initializeApp(config);
+
+    var dataRef = firebase.database();
+
+    // Initial Values
+
+    var Train Name = "";
+
+    var Destination = "";
+
+    var First Train Time = 0;
+
+    var Frequency = "";
+
+
+Train Name = $("#trainName").val().trim();
+
+      Destination = $("#destination").val().trim();
+
+      First Train Time = $("#firstTrainTime").val().trim();
+
+      Frequency = $("#frequency").val().trim();
+
+
+
+
+$("#add-user").on("click", function() {
+      // Don't refresh the page!
+      event.preventDefault();
+
+ var tFrequency = 3;
+
+    // Time is 3:30 AM
+    var firstTime = "03:30";
+
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
+
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % tFrequency;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = tFrequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+</script>
+
+</html>
